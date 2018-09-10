@@ -8,5 +8,6 @@ class SearchBar extends Component{
         return <input onChange={(event) => console.log(event.target.value)}/>;
     }
 }
+
 export default SearchBar;
 
