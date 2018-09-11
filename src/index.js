@@ -16,6 +16,7 @@ class App extends Component {
 
         YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
             this.setState({ videos });
+            console.log(videos);
         })
     }
 
@@ -33,4 +34,6 @@ class App extends Component {
 // on the page (in the DOM)
 
 ReactDOM.render(<App />, document.querySelector('.container'));
+
+
 
