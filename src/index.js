@@ -19,8 +19,12 @@ class App extends Component {
       selectedVideo: null
     };
 
-    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+    this.videoSearch('surfboards');
+  }
 
+
+  videoSearch(term) {
+    YTSearch({key: API_KEY, term: term}, (videos) => {
       console.log(videos);
       console.log('API 리턴 완료 setState 호출');
       this.setState({
@@ -29,12 +33,13 @@ class App extends Component {
       });
     })
   }
-  
+
+
   render() {
-    console.log('메인 render() 호출');
+    console.log('메인 render() 호출') ;
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
