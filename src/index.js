@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search'
@@ -34,12 +35,13 @@ class App extends Component {
     })
   }
 
-
   render() {
-    console.log('메인 render() 호출') ;
+    // debounce를 적용하여 300밀리 세컨즈마다 함수 호출 (300 밀리 세컨트 이전에 호출시 함수가 호출되지 않음)
+    // 호출이 반복되는 동안에는 로직 실행을 방지하며, 호출이 멈춘 뒤, 설정한 시간이 지나고 나서야 로직을 실행하게 된다.
+    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
     return (
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+        <SearchBar onSearchTermChange={videoSearch} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
